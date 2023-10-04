@@ -6,7 +6,7 @@ accountname:
   help: The name of the organization on GitHub
   default: radio-aktywne
 
-containername:
+devcontainername:
   type: str
   help: The name of the devcontainer
 
@@ -17,7 +17,7 @@ description:
 reponame:
   type: str
   help: The name of the repository
-  default: "devcontainer-{{ containername }}"
+  default: "devcontainer-{{ devcontainername }}"
 
 repourl:
   type: str
@@ -49,7 +49,7 @@ registry:
 imagename:
   type: str
   help: The name of the Docker image
-  default: "devcontainers/{{ containername }}"
+  default: "devcontainers/{{ devcontainername }}"
   when: "{{ registry }}"
 
 # Configuration

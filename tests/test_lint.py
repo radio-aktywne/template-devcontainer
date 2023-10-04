@@ -2,8 +2,9 @@ from pathlib import Path
 
 import copier
 import pytest
-from helpers.utils import CWD, SandboxedGitRepo
 from plumbum import local
+
+from tests.utils import CWD, SandboxedGitRepo
 
 
 @pytest.fixture()
@@ -12,7 +13,7 @@ def data() -> dict[str, str]:
 
     return {
         "accountname": "radio-aktywne",
-        "containername": "devcontainer-foo",
+        "devcontainername": "foo",
         "description": "Example devcontainer",
         "reponame": "devcontainer-foo",
         "repourl": "https://github.com/radio-aktywne/devcontainer-foo",
