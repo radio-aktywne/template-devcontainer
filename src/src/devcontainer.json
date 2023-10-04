@@ -16,7 +16,7 @@
   // Volumes
   "mounts": [
     // Mount nix store (shared)
-    "source=devcontainer-shared-nix,target=/nix,type=volume",
+    "source=devcontainer-${devcontainerId}-nix,target=/nix,type=volume",
     // Mount shell history (not shared)
     "source=devcontainer-${devcontainerId}-shellhistory,target=/shellhistory,type=volume",
     // Mount trunk cache (shared)
