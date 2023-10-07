@@ -25,6 +25,11 @@ cat <<EOF >>"${REMOTE_USER_HOME}/.zshrc"
 eval "\$(starship init zsh)"
 EOF
 
+# Setup secrets directory
+mkdir -p /secrets
+
+chown -R "${REMOTE_USER}:" /secrets
+
 # Setup shell history cache
 mkdir -p /persist/shellhistory
 
