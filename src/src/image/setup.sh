@@ -1,53 +1,55 @@
 #!/usr/bin/env bash
 
-REMOTE_USER="vscode"
+REMOTE_USER="${REMOTE_USER:?}"
+REMOTE_USER_PASSWD="$(getent passwd "${REMOTE_USER}")"
+REMOTE_USER_HOME="$(echo "${REMOTE_USER_PASSWD}" | cut -d: -f6)"
 
 # Setup default shell
 chsh -s /usr/bin/zsh "${REMOTE_USER}"
 
 # Setup direnv
-cat <<EOF >>"/home/${REMOTE_USER}/.bashrc"
+cat <<EOF >>"${REMOTE_USER_HOME}/.bashrc"
 eval "\$(direnv hook bash)"
 EOF
 
-cat <<EOF >>"/home/${REMOTE_USER}/.zshrc"
+cat <<EOF >>"${REMOTE_USER_HOME}/.zshrc"
 eval "\$(direnv hook zsh)"
 EOF
 
 # Setup starship
-cat <<EOF >>"/home/${REMOTE_USER}/.bashrc"
+cat <<EOF >>"${REMOTE_USER_HOME}/.bashrc"
 eval "\$(starship init bash)"
 EOF
 
-cat <<EOF >>"/home/${REMOTE_USER}/.zshrc"
+cat <<EOF >>"${REMOTE_USER_HOME}/.zshrc"
 eval "\$(starship init zsh)"
 EOF
 
 # Setup shell history cache
-mkdir -p "/shellhistory"
+mkdir -p /persist/shellhistory
 
-touch "/shellhistory/.bash_history"
-touch "/shellhistory/.zsh_history"
+touch /persist/shellhistory/.bash_history
+touch /persist/shellhistory/.zsh_history
 
-chown -R "${REMOTE_USER}:" "/shellhistory"
+chown -R "${REMOTE_USER}:" /persist/shellhistory
 
-cat <<EOF >>"/home/${REMOTE_USER}/.bashrc"
-export HISTFILE='/shellhistory/.bash_history'
+cat <<EOF >>"${REMOTE_USER_HOME}/.bashrc"
+export HISTFILE=/persist/shellhistory/.bash_history
 EOF
 
-cat <<EOF >>"/home/${REMOTE_USER}/.zshrc"
-export HISTFILE='/shellhistory/.zsh_history'
+cat <<EOF >>"${REMOTE_USER_HOME}/.zshrc"
+export HISTFILE=/persist/shellhistory/.zsh_history
 EOF
 
 # Setup trunk cache
-mkdir -p "/trunk"
+mkdir -p /cache/trunk
 
-chown -R "${REMOTE_USER}:" "/trunk"
+chown -R "${REMOTE_USER}:" /cache/trunk
 
-cat <<EOF >>"/home/${REMOTE_USER}/.bashrc"
-export TRUNK_CACHE='/trunk'
+cat <<EOF >>"${REMOTE_USER_HOME}/.bashrc"
+export TRUNK_CACHE=/cache/trunk
 EOF
 
-cat <<EOF >>"/home/${REMOTE_USER}/.zshrc"
-export TRUNK_CACHE='/trunk'
+cat <<EOF >>"${REMOTE_USER_HOME}/.zshrc"
+export TRUNK_CACHE=/cache/trunk
 EOF
