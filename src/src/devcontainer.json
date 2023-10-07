@@ -17,6 +17,11 @@
     // Mount trunk cache (shared)
     "source=devcontainer-shared-trunk-cache,target=/cache/trunk,type=volume"
   ],
+  // Environment variables
+  "remoteEnv": {
+    // Set workspace path
+    "WORKSPACE": "${containerWorkspaceFolder}"
+  },
   // Run arguments
   "runArgs": [
     // Use host network
