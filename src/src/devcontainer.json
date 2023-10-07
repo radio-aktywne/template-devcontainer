@@ -8,6 +8,8 @@
   },
   // Volumes
   "mounts": [
+    // Mount secrets (shared)
+    "source=devcontainer-shared-secrets,target=/secrets,type=volume",
     // Mount nix store (not shared)
     "source=devcontainer-${devcontainerId}-nix,target=/nix,type=volume",
     // Mount shell history (not shared)
