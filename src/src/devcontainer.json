@@ -4,18 +4,18 @@
     // Dockerfile to use, relative to this file
     "dockerfile": "image/Dockerfile",
     // Docker context to use, relative to this file
-    "context": "image"
+    "context": "image/"
   },
   // Volumes
   "mounts": [
     // Mount secrets (shared)
-    "source=devcontainer-shared-secrets,target=/secrets,type=volume",
+    "source=devcontainer-shared-secrets,target=/secrets/,type=volume",
     // Mount nix store (not shared)
-    "source=devcontainer-${devcontainerId}-nix,target=/nix,type=volume",
+    "source=devcontainer-${devcontainerId}-nix,target=/nix/,type=volume",
     // Mount shell history (not shared)
-    "source=devcontainer-${devcontainerId}-shellhistory-persist,target=/persist/shellhistory,type=volume",
+    "source=devcontainer-${devcontainerId}-shellhistory-persist,target=/persist/shellhistory/,type=volume",
     // Mount trunk cache (shared)
-    "source=devcontainer-shared-trunk-cache,target=/cache/trunk,type=volume"
+    "source=devcontainer-shared-trunk-cache,target=/cache/trunk/,type=volume"
   ],
   // Environment variables
   "remoteEnv": {
